@@ -20,8 +20,9 @@ public class CategoryDAO {
         String sql = "INSERT INTO Category (description) VALUES (?)";
 
         // try-with-resources garante o fechamento automático da Connection e PreparedStatement
-        try (Connection conn = SQLiteConnect.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+        try (Connection conn = SQLiteConnect.getConnection()){
+            System.out.println("ola");
+            PreparedStatement stmt = conn.prepareStatement(sql);
 
             stmt.setString(1, category.getDescription());
             stmt.executeUpdate();

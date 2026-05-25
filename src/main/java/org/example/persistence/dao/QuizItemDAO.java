@@ -20,7 +20,7 @@ public class QuizItemDAO {
     // ETAPA 1: INSERIR NOVA FRASE
     // ==========================================================
     public void insert(QuizItem item) throws SQLException {
-        String sql = "INSERT INTO QuizItem (sentence, answer, level, categoryId) VALUES (?, ?, ?, ?)";
+        String sql = "INSERT INTO QuizItem (sentence, answer, level, category_id) VALUES (?, ?, ?, ?)";
 
         // O bloco try-with-resources garante o fechamento automático da Connection e do PreparedStatement
         try (Connection conn = SQLiteConnect.getConnection();
@@ -45,10 +45,10 @@ public class QuizItemDAO {
         List<QuizItem> itens = new ArrayList<>();
 
         // INNER JOIN para buscar o nome da categoria junto com os dados da frase
-        String sql = "SELECT q.id, q.sentence, q.answer, q.level, q.categoryId, c.description AS category_name " +
+        String sql = "SELECT q.id, q.sentence, q.answer, q.level, q.category_id, c.description AS category_name " +
                 "FROM QuizItem q " +
-                "INNER JOIN Category c ON q.categoryId = c.id " +
-                "WHERE q.categoryId = ? " +
+                "INNER JOIN Category c ON q.category_id = c.id " +
+                "WHERE q.category_id = ? " +
                 "ORDER BY q.id";
 
         try (Connection conn = SQLiteConnect.getConnection();
@@ -74,9 +74,9 @@ public class QuizItemDAO {
         List<QuizItem> itens = new ArrayList<>();
 
         // INNER JOIN ordenado pelo nome da categoria, conforme requisito do trabalho
-        String sql = "SELECT q.id, q.sentence, q.answer, q.level, q.categoryId, c.description AS category_name " +
+        String sql = "SELECT q.id, q.sentence, q.answer, q.level, q.category_id, c.description AS category_name " +
                 "FROM QuizItem q " +
-                "INNER JOIN Category c ON q.categoryId = c.id " +
+                "INNER JOIN Category c ON q.category_id = c.id " +
                 "ORDER BY c.description, q.id";
 
         try (Connection conn = SQLiteConnect.getConnection();
@@ -102,7 +102,7 @@ public class QuizItemDAO {
             item.setSentence(rs.getString("sentence"));
             item.setAnswer(rs.getInt("answer"));
             item.setLevel(rs.getInt("level"));
-            item.setCategoryId(rs.getInt("categoryId"));
+            item.setCategoryId(rs.getInt("category_id"));
 
             // Atributo adicionado na Etapa 4 para armazenar o nome que veio do JOIN
             item.setCategoryName(rs.getString("category_name"));
@@ -125,7 +125,7 @@ public class QuizItemDAO {
                     item.setAnswer(rs.getInt("answer"));
                     item.setLevel(rs.getInt("level"));
                     // O nome da coluna no banco pode ser category_id ou categoryId dependendo de como você criou na Etapa 1
-                    item.setCategoryId(rs.getInt("categoryId"));
+                    item.setCategoryId(rs.getInt("category_id"));
                     return item;
                 }
             }
@@ -172,7 +172,7 @@ public class QuizItemDAO {
         // SQL com JOIN ordenado por categoria e id da frase
         String sql = "SELECT c.description AS category_name, q.id, q.sentence, q.answer, q.level " +
                 "FROM QuizItem q " +
-                "INNER JOIN Category c ON q.categoryId = c.id " +
+                "INNER JOIN Category c ON q.category_id = c.id " +
                 "ORDER BY c.description, q.id";
 
         try (Connection conn = SQLiteConnect.getConnection();

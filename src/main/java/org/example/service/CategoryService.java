@@ -31,8 +31,11 @@ public class CategoryService {
 
         Category newCategory = new Category(description.trim());
 
+
         try {
-            categoryDAO.insert(newCategory);
+
+            categoryDAO.insert(newCategory); //error explode aqui
+
             return "Sucesso: Categoria '" + description + "' inserida com sucesso!";
         } catch (SQLException e) {
             return "Falha ao inserir categoria: " + e.getMessage();
