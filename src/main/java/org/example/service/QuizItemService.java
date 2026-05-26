@@ -24,9 +24,9 @@ public class QuizItemService {
         this.categoryDAO = new CategoryDAO();
     }
 
-    public String cadastrarNovaFrase(String sentence, Integer answer, Integer level, Integer categoryId) {
+    public String cadastrarNovaFrase(String sentence, Integer answer, Integer level, Integer category_id) {
         // Validação: Todos os campos são obrigatórios
-        if (sentence == null || sentence.trim().isEmpty() || answer == null || level == null || categoryId == null) {
+        if (sentence == null || sentence.trim().isEmpty() || answer == null || level == null || category_id == null) {
             return "Erro: Todos os campos são obrigatórios.";
         }
 
@@ -40,7 +40,7 @@ public class QuizItemService {
             return "Erro: O valor de 'level' deve ser 0 (Fácil), 1 (Médio) ou 2 (Difícil).";
         }
 
-        QuizItem newItem = new QuizItem(sentence, answer, level, categoryId);
+        QuizItem newItem = new QuizItem(sentence, answer, level, category_id);
 
         try {
             quizItemDAO.insert(newItem);

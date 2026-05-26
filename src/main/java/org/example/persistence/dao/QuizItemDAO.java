@@ -115,7 +115,7 @@ public class QuizItemDAO {
                     item.setSentence(rs.getString("sentence"));
                     item.setAnswer(rs.getInt("answer"));
                     item.setLevel(rs.getInt("level"));
-                    // O nome da coluna no banco pode ser category_id ou categoryId dependendo de como você criou na Etapa 1
+                    // O nome da coluna no banco pode ser category_id ou category_id dependendo de como você criou na Etapa 1
                     item.setCategoryId(rs.getInt("category_id"));
                     return item;
                 }

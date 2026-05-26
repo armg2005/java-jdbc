@@ -20,7 +20,6 @@ public class CategoryDAO {
         String sql = "INSERT INTO Category (description) VALUES (?)";
 
         try (Connection conn = SQLiteConnect.getConnection()){
-            System.out.println("ola");
             PreparedStatement stmt = conn.prepareStatement(sql);
 
             stmt.setString(1, category.getDescription());

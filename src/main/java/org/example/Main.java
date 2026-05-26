@@ -82,10 +82,10 @@ public class Main {
             int level = Integer.parseInt(scanner.nextLine());
 
             System.out.print("Digite o ID da Categoria: ");
-            int categoryId = Integer.parseInt(scanner.nextLine());
+            int category_id = Integer.parseInt(scanner.nextLine());
 
             // Chama o service e imprime o retorno
-            String resultado = service.cadastrarNovaFrase(sentence, answer, level, categoryId);
+            String resultado = service.cadastrarNovaFrase(sentence, answer, level, category_id);
             System.out.println(resultado);
 
 
@@ -129,8 +129,8 @@ public class Main {
         System.out.print("Digite o ID da Categoria (0 para listar TODAS): ");
 
         try {
-            int categoryId = Integer.parseInt(scanner.nextLine());
-            List<QuizItem> frases = service.listarPorCategoria(categoryId);
+            int category_id = Integer.parseInt(scanner.nextLine());
+            List<QuizItem> frases = service.listarPorCategoria(category_id);
 
             if (frases.isEmpty()) {
                 System.out.println("Nenhuma frase encontrada para esta categoria.");
