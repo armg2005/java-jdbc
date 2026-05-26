@@ -8,11 +8,13 @@ import org.example.service.CategoryService;
 import java.util.List;
 import java.util.Scanner;
 
+// Autores: [Alisson Ricady e Gustavo Moreira]
+
 public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         QuizItemService quizItemService = new QuizItemService();
-        CategoryService categoryService = new CategoryService(); // Instancia o service
+        CategoryService categoryService = new CategoryService();
         int opcao = 0;
 
         while (opcao != 8) {
@@ -42,7 +44,7 @@ public class Main {
                 case 2:
                     inserirCategoriaMenu(scanner, categoryService);
                     break;
-                case 3: // <-- NOVO CASE
+                case 3:
                     listarCategoriasMenu(categoryService);
                     break;
                 case 4:
@@ -112,7 +114,6 @@ public class Main {
         if (categorias.isEmpty()) {
             System.out.println("Nenhuma categoria cadastrada no momento.");
         } else {
-            // Exibição em formato de tabela simples
             System.out.printf("%-5s | %-40s\n", "ID", "DESCRIÇÃO");
             System.out.println("-------------------------------------------------");
 
@@ -152,7 +153,7 @@ public class Main {
         } catch (NumberFormatException e) {
             System.out.println("Erro: Digite um ID numérico válido.");
         } catch (IllegalArgumentException e) {
-            // Captura o erro "Categoria não encontrada" lançado pelo Service [cite: 23]
+            // Captura o erro "Categoria não encontrada" lançado pelo Service
             System.out.println(e.getMessage());
         } catch (Exception e) {
             System.out.println("Erro inesperado: " + e.getMessage());
@@ -165,7 +166,7 @@ public class Main {
         try {
             int id = Integer.parseInt(scanner.nextLine());
 
-            // 1. Verifica se a frase existe ANTES de pedir os novos dados
+            // Verifica se a frase existe ANTES de pedir os novos dados
             QuizItem fraseAtual = service.buscarPorId(id);
 
             if (fraseAtual == null) {
@@ -173,10 +174,10 @@ public class Main {
                 return; // Encerra o método e volta ao menu principal
             }
 
-            // 2. Se existir, mostra a frase atual para contexto (opcional, mas boa prática)
+            // Se existir, mostra a frase atual para contexto (opcional, mas boa prática)
             System.out.println("Frase atual: " + fraseAtual.getSentence());
 
-            // 3. Solicita os novos valores
+            // Solicita os novos valores
             System.out.print("Digite a nova frase (sentence): ");
             String sentence = scanner.nextLine();
 
@@ -186,7 +187,7 @@ public class Main {
             System.out.print("Digite o novo nível (0 - Fácil, 1 - Médio, 2 - Difícil): ");
             int level = Integer.parseInt(scanner.nextLine());
 
-            // 4. Envia para o Service validar e atualizar
+            // Envia para o Service validar e atualizar
             String resultado = service.atualizarFrase(id, sentence, answer, level);
             System.out.println("\n" + resultado);
 
@@ -201,27 +202,27 @@ public class Main {
         try {
             int id = Integer.parseInt(scanner.nextLine());
 
-            // 1. Verifica se a frase existe (reutilizando o buscarPorId da Etapa 5)
+            // Verifica se a frase existe
             org.example.persistence.entity.QuizItem fraseAtual = service.buscarPorId(id);
 
-            // 2. Se não existir, exibe mensagem apropriada e cancela o fluxo
+            // Se não existir, exibe mensagem apropriada e cancela o fluxo
             if (fraseAtual == null) {
                 System.out.println("Frase não encontrada."); // Conforme exigido
                 return;
             }
 
-            // 3. Mostra os dados para o usuário saber o que está apagando
+            // Mostra os dados para o usuário saber o que está apagando
             String resposta = fraseAtual.getAnswer() == 1 ? "Verdadeiro" : "Falso";
             System.out.println("\nDados da frase encontrada:");
             System.out.println("ID: " + fraseAtual.getId());
             System.out.println("Frase: " + fraseAtual.getSentence());
             System.out.println("Resposta: " + resposta);
 
-            // 4. Solicita a confirmação antes de excluir
+            // Solicita a confirmação antes de excluir
             System.out.print("\nATENÇÃO: Deseja realmente excluir esta frase? (S/N): ");
             String confirmacao = scanner.nextLine().trim().toUpperCase();
 
-            // 5. Executa a deleção ou cancela a operação
+            // Executa a deleção ou cancela a operação
             if (confirmacao.equals("S")) {
                 String resultado = service.excluirFrase(id);
                 System.out.println(resultado);

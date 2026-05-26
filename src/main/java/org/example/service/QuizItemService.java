@@ -11,13 +11,13 @@ import java.sql.SQLException;
 import java.util.List;
 
 /**
- * Autores: [Seu Nome]
+ * Autores: [Alisson Ricady e Gustavo Moreira]
  * Descrição: Classe de serviço contendo as regras de negócio para QuizItem.
  */
 public class QuizItemService {
 
     private final QuizItemDAO quizItemDAO;
-    private final CategoryDAO categoryDAO; // Adicionado para fazer a validação cruzada
+    private final CategoryDAO categoryDAO;
 
     public QuizItemService() {
         this.quizItemDAO = new QuizItemDAO();
@@ -46,7 +46,6 @@ public class QuizItemService {
             quizItemDAO.insert(newItem);
             return "Sucesso: Frase cadastrada com sucesso no banco de dados!";
         } catch (SQLException e) {
-            // Tratamento da exceção retornando mensagem amigável
             return "Falha ao inserir frase no banco: " + e.getMessage();
         }
     }
@@ -60,7 +59,6 @@ public class QuizItemService {
                 if (!categoryDAO.exists(categoryId)) {
                     throw new IllegalArgumentException("Categoria não encontrada.");
                 }
-                // Se existe, busca as frases dela
                 return quizItemDAO.findByCategory(categoryId);
             }
         } catch (SQLException e) {
@@ -76,7 +74,6 @@ public class QuizItemService {
         }
     }
 
-    // 2. MÉTODO DE ATUALIZAÇÃO COM VALIDAÇÃO
     public String atualizarFrase(int id, String newSentence, Integer newAnswer, Integer newLevel) {
         // Validação dos campos obrigatórios
         if (newSentence == null || newSentence.trim().isEmpty() || newAnswer == null || newLevel == null) {
@@ -114,8 +111,6 @@ public class QuizItemService {
     }
     public String excluirFrase(int id) {
         try {
-            // Opcional: Você pode chamar buscarPorId(id) aqui novamente para garantir
-            // que a frase existe, mas como o Main já faz isso, podemos chamar direto o delete.
             quizItemDAO.delete(id);
             return "Sucesso: Frase excluída com sucesso!";
         } catch (SQLException e) {
@@ -130,7 +125,6 @@ public class QuizItemService {
                 return "Aviso: Não há dados cadastrados para exportar.";
             }
 
-            // O try-with-resources garante que o arquivo será fechado ao final do bloco
             try (FileWriter fw = new FileWriter(nomeArquivo);
                  BufferedWriter bw = new BufferedWriter(fw)) {
 

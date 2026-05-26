@@ -5,17 +5,16 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 /**
- * Autores: [Seu Nome]
+ * Autores: [Alisson Ricady e Gustavo Moreira]
  * Descrição: Classe responsável por estabelecer a conexão com o banco SQLite.
  */
 public class SQLiteConnect {
 
-    // Caminho para o arquivo do banco de dados na pasta 'data' na raiz do projeto
+    // Caminho para o arquivo do banco de dados
     private static final String URL = "jdbc:sqlite:data/SQLite.db";
 
     public static Connection getConnection() throws SQLException {
         try {
-            // Retorna a conexão com o banco de dados
             // Se o arquivo SQLite.db não existir, o driver criará um vazio automaticamente
             return DriverManager.getConnection(URL);
 

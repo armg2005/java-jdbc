@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Autores: [Seu Nome]
+ * Autores: [Alisson Ricady e Gustavo Moreira]
  * Descrição: Regras de negócio e validação para a entidade Category.
  */
 public class CategoryService {

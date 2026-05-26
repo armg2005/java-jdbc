@@ -1,7 +1,7 @@
 package org.example.persistence.entity;
 
 /**
- * Autores: [Seu Nome]
+ * Autores: [Alisson Ricady e Gustavo Moreira]
  * Descrição: Representa a entidade Category no banco de dados.
  */
 public class Category {

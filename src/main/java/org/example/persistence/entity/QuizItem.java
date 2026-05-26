@@ -1,7 +1,7 @@
 package org.example.persistence.entity;
 
 /**
- * Autores: [Alisson Ricady]
+ * Autores: [Alisson Ricady e Gustavo Moreira]
  * Descrição: Classe que representa a entidade QuizItem no banco de dados.
  */
 public class QuizItem {
@@ -11,7 +11,7 @@ public class QuizItem {
     private Integer level;
     private Integer categoryId;
 
-    // Novo atributo para guardar o nome da categoria vindo do JOIN
+    //Atributo para guardar o nome da categoria
     private String categoryName;
 
     public QuizItem() {}
@@ -23,7 +23,6 @@ public class QuizItem {
         this.categoryId = categoryId;
     }
 
-    // --- Getters e Setters ---
 
     public Integer getId() { return id; }
     public void setId(Integer id) { this.id = id; }
@@ -40,7 +39,6 @@ public class QuizItem {
     public Integer getCategoryId() { return categoryId; }
     public void setCategoryId(Integer categoryId) { this.categoryId = categoryId; }
 
-    // Getters e Setters do novo atributo (categoryName)
     public String getCategoryName() { return categoryName; }
     public void setCategoryName(String categoryName) { this.categoryName = categoryName; }
 }
